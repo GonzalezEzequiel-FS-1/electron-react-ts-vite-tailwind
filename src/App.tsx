@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react';
 import './default.css'
 
-
+declare global {
+  interface Window{handler:any}
+}
 
 function App() {
 
   const { onClose, onMinimize, onMaximize, isFullScreen } = window.handler;
-  const [FullScreen, setFullScreen] = useState(false)
-    window.addEventListener('resize', () => {setFullScreen(isFullScreen())})
+  const [FullScreen, setFullScreen] = useState(false);
 
-  console.log(FullScreen)
+  useEffect(()=> {
+    setFullScreen(isFullScreen())
+  },[])
+  window.addEventListener('resize', () => {setFullScreen(isFullScreen())})
+
   const titleBar = () => {
     if (!FullScreen) {
       return <div id="title-bar">

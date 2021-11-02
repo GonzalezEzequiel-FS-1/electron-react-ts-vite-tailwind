@@ -4,10 +4,11 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
-const isDev = require('electron-is-dev');
+const isDev = require('electron-is-dev'); 
 let mainWindow;
 
-console.log(app.getAppPath())
+console.log(isDev)
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800, 
@@ -19,7 +20,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js')
     }
   });
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../dist/index.html')}`);
   if (isDev) {
     // Open the DevTools.
     //BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
