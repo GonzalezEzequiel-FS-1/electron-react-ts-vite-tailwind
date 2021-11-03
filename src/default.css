@@ -1,12 +1,15 @@
 body {
     padding: 0px;
     margin: 0px;
-    background-color: #2D2D30;
     position: absolute;
     top: 0px;
     left: 0px;
     right: 0px;
     bottom: 0px;
+}
+#main{
+    background-color: #2D2D30;
+    height: 100vh
 }
 
 #title-bar {
@@ -35,27 +38,37 @@ body {
     position: fixed;
     top: 1px;
     right: 0px;
-    margin: 5px;
-    margin-right: 10px;
+    margin: 1px;
+    margin-right: 1px;
+    display: flex;
+    box-sizing:border-box;
 }
 
 #title-bar-btns button {
-    height: 14px;
-    width: 14px;
+    height: 26px;
+    width: 36px;
     border: none;
-    color: #F1F1F1;
-    font-size: 16px;
-    margin: 5px;
-    margin-top: 3.5px;
+    color: #000000;
+    background-color: #ffffff00;
+    font-size: 13px;
+    margin: 3px;
+    margin-top: 1px;
+    text-align: left;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}
+#title-bar-btns button > span {
+    font-size: 20px;
 }
 
-#title-bar-btns button:hover {
-    background-color: #3F3F41;
-}
 
 .content {
     height: 80vh;
-    padding-top: 55px;
+    padding-top: 45px;
     color: #CCCCCC;
     display: flex;
     flex: 1;
@@ -89,17 +102,48 @@ a {
     color: #68217A;
 }
 
-#close-btn {
-    background-color: rgb(255, 0, 0);
-    border-radius: 50%;
+#close-btn:hover {
+    background-color: rgba(255, 0, 0, 0.726);   
+}
+#close-btn:hover>span {
+    color: white;
 }
 
-#min-btn {
+#min-btn:hover {
+    background-color: rgba(185, 185, 185, 0.2);
+}
+
+#max-btn:hover {
+    background-color: rgba(185, 185, 185, 0.2);
+}
+
+/* #close-btn:hover {
+    background-color: rgba(255, 0, 0);
+    color: white;
+    border-radius: 20%;
+}
+
+#min-btn:hover {
     background-color: rgb(3, 189, 3);
-    border-radius: 50%;
+    border-radius: 20%;
 }
 
-#max-btn {
+#max-btn:hover {
     background-color: rgb(255, 255, 0);
+    border-radius: 20%;
+} */
+
+.lightbtn>span{
+    display: flex;
+    justify-content: center;
     border-radius: 50%;
+}
+button>span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#maximize{
+    font-size: 14px !important;
+    font-weight: lighter !important;
 }
