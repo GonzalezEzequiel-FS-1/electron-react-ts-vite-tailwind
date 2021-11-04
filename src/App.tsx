@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import pkg from '../package.json'
-import { IoMoon, IoSunny } from 'react-icons/io5';
 import {BsMoonStarsFill, BsSunFill} from 'react-icons/bs'
 import {VscChromeMaximize} from 'react-icons/vsc'
 import './default.css';
@@ -8,31 +7,49 @@ import "./lightmode.css"
 
 
 declare global {
-  interface Window{handler:any}
+  interface Window{handler:{onClose: Function, onMinimize:Function, onMaximize:Function, isFullScreen: Function}}
 }
+let onClose: Function, onMinimize: Function, onMaximize: Function, isFullScreen: Function ;
 
-
+console.log(typeof window.handler)
+if(typeof window.handler != "undefined") {
+  onClose = window.handler.onClose;
+  onMinimize = window.handler.onMinimize; 
+  onMaximize = window.handler.onMaximize;
+  isFullScreen = window.handler.isFullScreen;
+}
+else{ 
+  isFullScreen = () => {return true}
+}
 function App() {
-  const { onClose, onMinimize, onMaximize, isFullScreen } = window.handler;
   const [FullScreen, setFullScreen] = useState(false);
   const [isLight, setIsLight] = useState(false)
 
+
+// Check if the window is fullScreen only one time when the application run. 
   useEffect(()=> {
     setFullScreen(isFullScreen())
   },[])
 
-  window.addEventListener('resize', () => {setFullScreen(isFullScreen())})
+// Check the resize event and check if it on FullScreen and change te state only if its different as the past state; 
+  window.addEventListener('resize', () => {if(FullScreen != isFullScreen()){setFullScreen(isFullScreen())}});
+
+// Change the mode of light of the windows ( dark or light );  
   const handleLight = () => {
-  console.log(isLight)
-  setIsLight(!isLight)
+    setIsLight(!isLight);
   }
+
+// if the window is on fullScreen mode put ContentFS in classname to desactivate the top margin. 
   const fs = () => {
-    return FullScreen ? "contentFS" : "content" 
-  }
-  const light = () => {
-    return isLight ? "light" : ""
+    return FullScreen ? "contentFS" : "content"; 
   }
   
+// if the window is on light mode put 'light' in classname to activate the ligth class in CSS.
+  const light = () => {
+    return isLight ? "light" : ""; 
+  }
+
+// Creating the TitleBar only if the window is not in FullScreen. 
   const titleBar = () => {
     if (!FullScreen){
       return <div id="title-bar" className={light()+'bar'}>
@@ -46,15 +63,19 @@ function App() {
           <button id="close-btn" style={isLight ? {color: "black"} : {color: "white"}} onClick={() => { onClose() }}><span>&times;</span></button>
         </div>
       </div>
-    } else { return <></> }
+    } 
+    else {
+       return <></> 
+      }
   }
-
-  return (<div className={light()} id="main">
-    {titleBar()}
-    <div className={fs() +" "+ light()}>
-      Here you can write your content
+  return (
+    <div className={light()} id="main">
+      {titleBar()}
+      <div className={fs() +" "+ light()}>
+        Here you can write your content
+      </div>
     </div>
-  </div>)
+  )
 }
 
 export default App
