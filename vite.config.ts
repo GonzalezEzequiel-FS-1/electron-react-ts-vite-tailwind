@@ -1,8 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
-  base: process.env.ELECTRON=="true" ? './' : ".",
-  plugins: [react()]
+  plugins: [react()],
+  build: {
+    outDir: './app/renderer',
+  }
 })
