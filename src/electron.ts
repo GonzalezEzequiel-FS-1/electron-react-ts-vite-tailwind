@@ -6,4 +6,3 @@ declare global {
       electron: typeof api;
     }
   }
-  

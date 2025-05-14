@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import CloseButtons from "./CloseButtons";
 
 const Header = () => {
   const header = useRef<HTMLElement>(null);
@@ -18,7 +17,6 @@ const Header = () => {
 
   return (
     <nav ref={header} className="h-11 dark:bg-main-dark bg-[#f7f7f7] z-10 drag p-1">
-      {window.electron && <CloseButtons />}
     </nav>
   );
 };
